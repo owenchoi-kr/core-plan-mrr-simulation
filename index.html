@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Core Plan $30K MRR 시뮬레이션</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2129;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --yellow: #d29922;
+    --red: #f85149;
+    --orange: #db6d28;
+    --purple: #bc8cff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 40px 20px;
+  }
+
+  .container { max-width: 960px; margin: 0 auto; }
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+
+  .date { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 32px; }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--accent);
+  }
+
+  /* Verdict box */
+  .verdict {
+    background: linear-gradient(135deg, rgba(88,166,255,0.06), rgba(188,140,255,0.06));
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin: 0 0 40px;
+    font-size: 1.05rem;
+    line-height: 1.9;
+  }
+
+  .verdict p { margin-bottom: 12px; }
+  .verdict strong { color: var(--accent); }
+  .verdict .warn { color: var(--yellow); font-weight: 600; }
+  .verdict .danger { color: var(--red); font-weight: 600; }
+
+  /* Big numbers */
+  .big-numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .big-num {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+  }
+
+  .big-num .value { font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .big-num .label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+
+  /* Narrative */
+  .narrative {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+    margin: 16px 0;
+  }
+
+  .narrative p { margin-bottom: 12px; }
+  .narrative strong { color: var(--text); }
+  .narrative .hl { color: var(--accent); font-weight: 600; }
+
+  /* Simple table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 0.9rem;
+  }
+
+  th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--surface); color: var(--text-muted); font-weight: 600; font-size: 0.82rem; }
+  td { font-variant-numeric: tabular-nums; }
+
+  .highlight-row td { background: rgba(88,166,255,0.08); font-weight: 600; }
+
+  /* Funnel */
+  .funnel { margin: 24px 0; }
+
+  .funnel-step {
+    display: grid;
+    grid-template-columns: 160px 1fr 100px;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    margin: 4px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .funnel-step .stage { font-weight: 600; font-size: 0.9rem; }
+  .funnel-step .bar-wrap { position: relative; height: 28px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
+  .funnel-step .bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; font-size: 0.8rem; font-weight: 600; color: var(--bg); min-width: 40px; }
+  .funnel-step .count { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .funnel-step .cvr-label { font-size: 0.75rem; color: var(--text-muted); text-align: right; }
+
+  .funnel-arrow {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 2px 0;
+  }
+
+  /* Scenario cards */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .scenario-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  .scenario-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .scenario-card .kv {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.88rem;
+    border-bottom: 1px solid rgba(48,54,61,0.5);
+  }
+
+  .scenario-card .kv:last-child { border-bottom: none; }
+  .scenario-card .kv .k { color: var(--text-muted); }
+  .scenario-card .kv .v { font-weight: 600; }
+
+  /* Callout */
+  .callout {
+    background: var(--surface);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .callout strong { color: var(--text); }
+  .callout.warn { border-left-color: var(--yellow); }
+
+  /* Action items */
+  .actions {
+    margin: 20px 0;
+  }
+
+  .action-item {
+    display: grid;
+    grid-template-columns: 40px 1fr;
+    gap: 12px;
+    padding: 16px;
+    margin: 8px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .action-num {
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: var(--bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+
+  .action-body .action-title { font-weight: 700; margin-bottom: 4px; }
+  .action-body .action-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; }
+
+  .footer {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .big-numbers { grid-template-columns: 1fr; }
+    .scenario-grid { grid-template-columns: 1fr; }
+    .funnel-step { grid-template-columns: 120px 1fr 80px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Core Plan $30K MRR: 9월까지 가능한가?</h1>
+<div class="date">2026-03-15 &middot; GTM 시뮬레이션</div>
+
+<!-- 결론 먼저 -->
+<div class="verdict">
+  <p>전체 MRR 목표 $35K 중 기존 딥링크 플랜 $5K를 빼면, <strong>Core Plan이 만들어야 할 MRR은 $30K</strong>다. 현재 Core Plan MRR은 $0.</p>
+  <p>이를 위해 <strong>과금 고객 ~210개사</strong>(이탈 보충 포함)를 6개월 안에 만들어야 한다. 퍼널 CVR을 업계 벤치마크 수준으로 올리면 <span class="warn">월 트래픽 5,300~11,400</span>이 필요하고, 현재 US 트래픽(~5.8K/월)으로는 <strong>최적 시나리오에서만 겨우 가능</strong>하다.</p>
+</div>
+
+<!-- 핵심 숫자 -->
+<div class="big-numbers">
+  <div class="big-num">
+    <div class="value" style="color:var(--accent)">$30K</div>
+    <div class="label">Core Plan이 만들 MRR<br>(딥링크 $5K 별도)</div>
+  </div>
+  <div class="big-num">
+    <div class="value" style="color:var(--yellow)">~210개사</div>
+    <div class="label">필요 과금 고객<br>(이탈 3%/월 보충 포함)</div>
+  </div>
+  <div class="big-num">
+    <div class="value" style="color:var(--red)">0개사</div>
+    <div class="label">현재 Core Plan 과금 고객<br>(PLG 전환 0건)</div>
+  </div>
+</div>
+
+<!-- 1. 과금 고객당 얼마를 내나 -->
+<h2>1. 과금 고객 한 명이 월 얼마를 내나?</h2>
+
+<div class="narrative">
+  <p>Core Plan은 <strong>인스톨당 $0.05</strong>를 과금한다. 월 1,250개(연 15K)까지는 무료이고, 그 이상부터 돈을 낸다.</p>
+  <p>고객의 UA(광고) 지출 규모에 따라 인스톨이 결정되고, 그게 곧 과금액이 된다.</p>
+</div>
+
+<table>
+  <thead>
+    <tr><th>고객 유형</th><th>월 UA 지출</th><th>월 인스톨</th><th>과금 인스톨</th><th>월 과금액</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>중간 (75%)</td><td>$10-20K</td><td>2,500-5,000</td><td>1,250-3,750</td>
+      <td style="color:var(--yellow); font-weight:700">~$125</td>
+    </tr>
+    <tr>
+      <td>대형 (25%)</td><td>$23-33K</td><td>5,750-8,250</td><td>4,500-7,000</td>
+      <td style="color:var(--orange); font-weight:700">~$290</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>가중 평균</strong></td><td></td><td></td><td></td>
+      <td style="font-size:1.1rem"><strong>~$166/월</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>계산:</strong> $30,000 &divide; $166 = <strong>181개사</strong>. 매달 3% 이탈을 감안하면 6개월간 ~29개사 추가 보충 필요 &rarr; <strong>총 ~210개사.</strong>
+</div>
+
+<!-- 2. 210개를 만들려면 -->
+<h2>2. 210개 과금 고객을 만들려면, 몇 명을 데려와야 하나?</h2>
+
+<div class="narrative">
+  <p>데려오는 유저 전부가 돈을 내는 건 아니다. 업계 벤치마크(ChartMogul 2026)에 따르면 Freemium 셀프서브 제품의 과금 전환율은 <strong>3-5% (Good), 8-12% (Great)</strong>다.</p>
+</div>
+
+<table>
+  <thead>
+    <tr><th>과금 전환율</th><th>총 유저 필요</th><th style="color:var(--green)">과금</th><th style="color:var(--text-muted)">무과금</th><th>월 유입 목표 (6개월)</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3%</td><td>7,000</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">6,790</td>
+      <td style="color:var(--red); font-weight:700">1,167/월</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>5%</strong></td><td><strong>4,200</strong></td><td style="color:var(--green)"><strong>210</strong></td><td style="color:var(--text-muted)"><strong>3,990</strong></td>
+      <td style="font-weight:700"><strong>700/월</strong></td>
+    </tr>
+    <tr>
+      <td>10%</td><td>2,100</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">1,890</td>
+      <td style="color:var(--green); font-weight:700">350/월</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  전환율 5%(벤치마크 Good 상한)를 달성하면 <strong>총 4,200명을 데려와서 210명이 과금</strong>. 월 700명씩 6개월.
+</div>
+
+<!-- 3. 퍼널 역산 -->
+<h2>3. 그러면 트래픽을 얼마나 부어야 하나?</h2>
+
+<div class="narrative">
+  <p>700명이 가입하려면 그 전에 더 많은 방문자가 와야 한다. Core Plan은 일반 SaaS와 달리 <strong>가입 &rarr; SDK 설치 &rarr; 채널 연결</strong>까지 3단계를 거쳐야 활성화된다. 각 단계마다 이탈이 발생한다.</p>
+  <p>아래는 <strong>업계 벤치마크 CVR</strong>로 210 Paid에서 거꾸로 역산한 것이다.</p>
+</div>
+
+<!-- Funnel visual -->
+<div class="funnel">
+  <div class="funnel-step">
+    <div class="stage">Traffic</div>
+    <div class="bar-wrap"><div class="bar" style="width:100%; background:var(--accent)"></div></div>
+    <div>
+      <div class="count" style="color:var(--yellow)">68,359</div>
+      <div class="cvr-label">Base</div>
+    </div>
+  </div>
+  <div class="funnel-arrow">&darr; 8% 가입 전환</div>
+  <div class="funnel-step">
+    <div class="stage">Signup</div>
+    <div class="bar-wrap"><div class="bar" style="width:45%; background:var(--purple)"></div></div>
+    <div>
+      <div class="count" style="color:var(--yellow)">5,469</div>
+      <div class="cvr-label"></div>
+    </div>
+  </div>
+  <div class="funnel-arrow">&darr; 20% SDK 설치</div>
+  <div class="funnel-step">
+    <div class="stage">SDK Install</div>
+    <div class="bar-wrap"><div class="bar" style="width:18%; background:var(--orange)"></div></div>
+    <div>
+      <div class="count" style="color:var(--yellow)">1,094</div>
+      <div class="cvr-label"></div>
+    </div>
+  </div>
+  <div class="funnel-arrow">&darr; 60% 채널 연결 (활성화)</div>
+  <div class="funnel-step">
+    <div class="stage">Active</div>
+    <div class="bar-wrap"><div class="bar" style="width:10%; background:var(--yellow)"></div></div>
+    <div>
+      <div class="count" style="color:var(--yellow)">656</div>
+      <div class="cvr-label"></div>
+    </div>
+  </div>
+  <div class="funnel-arrow">&darr; 32% 과금 전환 (free tier 소진)</div>
+  <div class="funnel-step">
+    <div class="stage" style="color:var(--green)">Paid</div>
+    <div class="bar-wrap"><div class="bar" style="width:5%; background:var(--green)">210</div></div>
+    <div>
+      <div class="count" style="color:var(--green)">210</div>
+      <div class="cvr-label"></div>
+    </div>
+  </div>
+</div>
+
+<div class="narrative">
+  <p>이 퍼널을 <strong>Base 시나리오</strong>(벤치마크 중간값)와 <strong>Aggressive 시나리오</strong>(벤치마크 상한)로 나누면:</p>
+</div>
+
+<div class="scenario-grid">
+  <div class="scenario-card" style="border-color:var(--yellow)">
+    <h3 style="color:var(--yellow)">Base 시나리오</h3>
+    <div class="kv"><span class="k">가입 전환</span><span class="v">8%</span></div>
+    <div class="kv"><span class="k">SDK 설치</span><span class="v">20%</span></div>
+    <div class="kv"><span class="k">채널 연결</span><span class="v">60%</span></div>
+    <div class="kv"><span class="k">과금 전환</span><span class="v">32%</span></div>
+    <div class="kv" style="border-top:2px solid var(--border); margin-top:8px; padding-top:12px">
+      <span class="k">전체 CVR</span><span class="v" style="color:var(--yellow)">0.31%</span>
+    </div>
+    <div class="kv"><span class="k">총 트래픽 필요</span><span class="v">68,359</span></div>
+    <div class="kv"><span class="k"><strong>월 트래픽</strong></span><span class="v" style="color:var(--yellow); font-size:1.1rem"><strong>11,393</strong></span></div>
+    <div class="kv"><span class="k">US 트래픽(5.8K) 대비</span><span class="v" style="color:var(--red)">2.0x</span></div>
+  </div>
+  <div class="scenario-card" style="border-color:var(--green)">
+    <h3 style="color:var(--green)">Aggressive 시나리오</h3>
+    <div class="kv"><span class="k">가입 전환</span><span class="v">9%</span></div>
+    <div class="kv"><span class="k">SDK 설치</span><span class="v">25%</span></div>
+    <div class="kv"><span class="k">채널 연결</span><span class="v">70%</span></div>
+    <div class="kv"><span class="k">과금 전환</span><span class="v">42%</span></div>
+    <div class="kv" style="border-top:2px solid var(--border); margin-top:8px; padding-top:12px">
+      <span class="k">전체 CVR</span><span class="v" style="color:var(--green)">0.66%</span>
+    </div>
+    <div class="kv"><span class="k">총 트래픽 필요</span><span class="v">31,746</span></div>
+    <div class="kv"><span class="k"><strong>월 트래픽</strong></span><span class="v" style="color:var(--green); font-size:1.1rem"><strong>5,291</strong></span></div>
+    <div class="kv"><span class="k">US 트래픽(5.8K) 대비</span><span class="v" style="color:var(--green)">0.9x</span></div>
+  </div>
+</div>
+
+<div class="callout warn">
+  <strong>핵심:</strong> Aggressive 시나리오(퍼널 CVR을 벤치마크 상한까지 전부 올리면)에서만 현재 US 트래픽으로 커버된다. <strong>퍼널 최적화가 안 되면 트래픽을 2배로 늘려야 한다.</strong>
+</div>
+
+<!-- 4. 결론 -->
+<h2>4. 결론</h2>
+
+<div class="narrative">
+  <p><strong>$30K Core Plan MRR, 9월까지 가능한가?</strong></p>
+  <p>조건부로 가능하다. 하지만 <strong>두 가지를 동시에</strong> 해결해야 한다:</p>
+</div>
+
+<div class="actions">
+  <div class="action-item">
+    <div class="action-num">1</div>
+    <div class="action-body">
+      <div class="action-title">퍼널 고치기 (SDK 설치 + 활성화)</div>
+      <div class="action-desc">SDK 설치율 2.2% &rarr; 20%, 활성화율 0% &rarr; 60%. 이게 안 되면 트래픽을 아무리 부어도 소용없다. 온보딩 스텝 축소, 자동 가이드 이메일, 1:1 CS 터치가 필요하다.</div>
+    </div>
+  </div>
+  <div class="action-item">
+    <div class="action-num">2</div>
+    <div class="action-body">
+      <div class="action-title">트래픽 파이프라인 구축</div>
+      <div class="action-desc">Core Plan 전용 가입자는 현재 ~0이다. (기존 US 트래픽 5.8K/월은 Growth Plan 시절.) 퍼널이 고쳐지면 월 5,300 트래픽으로 충분하고, 안 고쳐지면 11,400이 필요하다.</div>
+    </div>
+  </div>
+</div>
+
+<div class="narrative">
+  <p><strong>한쪽만 해결하면?</strong></p>
+</div>
+
+<table>
+  <thead>
+    <tr><th>시나리오</th><th>조건</th><th>예상 MRR</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>아무것도 안 하면</td>
+      <td>과금 고객 0, 퍼널 고장</td>
+      <td style="color:var(--red); font-weight:700">$0</td>
+    </tr>
+    <tr>
+      <td>한쪽만 해결</td>
+      <td>퍼널 OR 트래픽 중 하나만</td>
+      <td style="color:var(--yellow); font-weight:700">$10-15K</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>풀 실행</strong></td>
+      <td><strong>퍼널 최적화 + 트래픽 확보</strong></td>
+      <td style="color:var(--green); font-weight:700"><strong>$30K</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="margin-top:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:0.92rem; line-height:1.8; color:var(--text-muted)">
+  <strong style="color:var(--text)">타임라인 제약:</strong> 무료 티어(15K installs) 소진에 약 6개월이 걸린다. 9월에 과금이 시작되려면 <strong style="color:var(--yellow)">3-4월에 활성화가 시작</strong>되어야 한다. 시간이 많지 않다.
+</div>
+
+<div class="footer">
+  Core Plan $30K MRR 시뮬레이션 &middot; 2026-03-15<br>
+  벤치마크 출처: ChartMogul &times; ProductLed 2026 (200개 B2B SW), First Page Sage (80개사)
+</div>
+
+</div>
+</body>
+</html>
