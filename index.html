@@ -244,7 +244,7 @@
 <!-- 결론 먼저 -->
 <div class="verdict">
   <p>전체 MRR 목표 $35K 중 기존 딥링크 플랜 $5K를 빼면, <strong>Core Plan이 만들어야 할 MRR은 $30K</strong>다. 현재 Core Plan MRR은 $0.</p>
-  <p>이를 위해 <strong>과금 고객 ~210개사</strong>(이탈 보충 포함)를 6개월 안에 만들어야 한다. 벤치마크 2개(Visit&rarr;Signup, Signup&rarr;Paid)만으로 역산하면 <span class="warn">월 트래픽 3,900~8,750</span>이 필요하고, 현재 US 트래픽(~5.8K/월)과 비교하면 <strong>중간 시나리오에서 1.3~1.5배</strong> 수준이다.</p>
+  <p>이를 위해 <strong>과금 고객 ~210개사</strong>(이탈 보충 포함)를 6개월 안에 만들어야 한다. 개발자 도구 벤치마크(OpenView 2023)로 역산하면 <span class="warn">월 트래픽 7,000~11,700</span>이 필요하고, 현재 US 트래픽(~5.8K/월)의 <strong class="danger">1.2~2.0배</strong> 수준이다.</p>
 </div>
 
 <!-- 핵심 숫자 -->
@@ -299,7 +299,7 @@
 <h2>2. 210개 과금 고객을 만들려면, 몇 명을 데려와야 하나?</h2>
 
 <div class="narrative">
-  <p>데려오는 유저 전부가 돈을 내는 건 아니다. 업계 벤치마크(ChartMogul 2026)에 따르면 Freemium 셀프서브 제품의 과금 전환율은 <strong>3-5% (Good), 8-12% (Great)</strong>다.</p>
+  <p>데려오는 유저 전부가 돈을 내는 건 아니다. 개발자 도구 벤치마크(OpenView/boldstart 2023, 수백 개사)에 따르면 <strong>Signup&rarr;Paid는 5%</strong>다. 일반 SaaS(10%)의 절반 수준이고, SDK 설치가 필수인 제품은 이보다 더 낮을 수 있다.</p>
 </div>
 
 <table>
@@ -308,31 +308,36 @@
   </thead>
   <tbody>
     <tr>
+      <td>2% <span style="color:var(--text-muted); font-size:0.8rem">(SDK 마찰)</span></td><td>10,500</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">10,290</td>
+      <td style="color:var(--red); font-weight:700">1,750/월</td>
+    </tr>
+    <tr>
       <td>3%</td><td>7,000</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">6,790</td>
       <td style="color:var(--red); font-weight:700">1,167/월</td>
     </tr>
     <tr class="highlight-row">
-      <td><strong>5%</strong></td><td><strong>4,200</strong></td><td style="color:var(--green)"><strong>210</strong></td><td style="color:var(--text-muted)"><strong>3,990</strong></td>
+      <td><strong>5%</strong> <span style="font-size:0.8rem">(dev tool median)</span></td><td><strong>4,200</strong></td><td style="color:var(--green)"><strong>210</strong></td><td style="color:var(--text-muted)"><strong>3,990</strong></td>
       <td style="font-weight:700"><strong>700/월</strong></td>
     </tr>
     <tr>
-      <td>10%</td><td>2,100</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">1,890</td>
+      <td>10% <span style="color:var(--text-muted); font-size:0.8rem">(일반 SaaS)</span></td><td>2,100</td><td style="color:var(--green)">210</td><td style="color:var(--text-muted)">1,890</td>
       <td style="color:var(--green); font-weight:700">350/월</td>
     </tr>
   </tbody>
 </table>
 
 <div class="callout">
-  전환율 5%(벤치마크 Good 상한)를 달성하면 <strong>총 4,200명을 데려와서 210명이 과금</strong>. 월 700명씩 6개월.
+  개발자 도구 median(5%)을 달성하면 <strong>총 4,200명을 데려와서 210명이 과금</strong>. 월 700명씩 6개월. SDK 마찰까지 감안하면(2%) 10,500명 필요.
 </div>
 
 <!-- 3. 트래픽 역산 (벤치마크 2개만) -->
 <h2>3. 그러면 트래픽을 얼마나 부어야 하나?</h2>
 
 <div class="narrative">
-  <p>검증된 벤치마크 <strong>2개만</strong> 사용한다:</p>
-  <p>&bull; <strong>Visit &rarr; Signup: 7-9%</strong> (B2B SaaS 평균, ChartMogul 2026)</p>
-  <p>&bull; <strong>Signup &rarr; Paid: 3-10%</strong> (Freemium 셀프서브, ChartMogul 2026)</p>
+  <p><strong>개발자 도구 전용</strong> 벤치마크(OpenView/boldstart 2023, 수백 개사)를 사용한다:</p>
+  <p>&bull; <strong>Visit &rarr; Signup: 10%</strong> (개발자 도구 median)</p>
+  <p>&bull; <strong>Signup &rarr; Paid: 5%</strong> (개발자 도구 median, 일반 SaaS 10%의 절반)</p>
+  <p>Core Plan은 SDK 설치가 필수라 <strong>개발자 도구 중에서도 마찰이 높은 편</strong>이다. 2-3% 시나리오도 봐야 한다.</p>
   <p>계산: <span class="hl">트래픽 = 210 &divide; (Visit&rarr;Signup &times; Signup&rarr;Paid)</span></p>
 </div>
 
@@ -342,34 +347,30 @@
   </thead>
   <tbody>
     <tr>
-      <td>3%</td><td>7,000</td><td>8%</td><td>87,500</td>
-      <td style="color:var(--red); font-weight:700">14,583</td>
-      <td style="color:var(--red); font-weight:700">2.5x</td>
+      <td>2% <span style="color:var(--text-muted); font-size:0.8rem">(SDK 마찰)</span></td><td>10,500</td><td>10%</td><td>105,000</td>
+      <td style="color:var(--red); font-weight:700">17,500</td>
+      <td style="color:var(--red); font-weight:700">3.0x</td>
+    </tr>
+    <tr>
+      <td>3%</td><td>7,000</td><td>10%</td><td>70,000</td>
+      <td style="color:var(--red); font-weight:700">11,667</td>
+      <td style="color:var(--red); font-weight:700">2.0x</td>
     </tr>
     <tr class="highlight-row">
-      <td><strong>5%</strong></td><td><strong>4,200</strong></td><td><strong>8%</strong></td><td><strong>52,500</strong></td>
-      <td style="font-weight:700"><strong>8,750</strong></td>
-      <td style="font-weight:700"><strong>1.5x</strong></td>
+      <td><strong>5%</strong> <span style="font-size:0.8rem">(dev tool median)</span></td><td><strong>4,200</strong></td><td><strong>10%</strong></td><td><strong>42,000</strong></td>
+      <td style="font-weight:700"><strong>7,000</strong></td>
+      <td style="font-weight:700"><strong>1.2x</strong></td>
     </tr>
     <tr>
-      <td>5%</td><td>4,200</td><td>9%</td><td>46,667</td>
-      <td style="font-weight:700">7,778</td>
-      <td style="font-weight:700">1.3x</td>
-    </tr>
-    <tr>
-      <td>10%</td><td>2,100</td><td>9%</td><td>23,333</td>
-      <td style="color:var(--green); font-weight:700">3,889</td>
-      <td style="color:var(--green); font-weight:700">0.7x</td>
+      <td>10% <span style="color:var(--text-muted); font-size:0.8rem">(일반 SaaS)</span></td><td>2,100</td><td>10%</td><td>21,000</td>
+      <td style="color:var(--green); font-weight:700">3,500</td>
+      <td style="color:var(--green); font-weight:700">0.6x</td>
     </tr>
   </tbody>
 </table>
 
-<div class="callout">
-  <strong>읽는 법:</strong> Signup&rarr;Paid 5%, Visit&rarr;Signup 8%이면 월 <strong>8,750</strong> 트래픽이 필요하다. 현재 US 5.8K의 1.5배. Signup&rarr;Paid를 10%까지 올리면 현재 트래픽으로도 가능하다.
-</div>
-
 <div class="callout warn">
-  <strong>이전 버전과 차이:</strong> 4단계 퍼널(SDK 설치율 20%, 활성화율 60%, Active&rarr;Paid 32%)은 검증 안 된 가정이었다. 벤치마크로 확인된 2개 CVR만 남기면 필요 트래픽 범위가 <strong>월 3,900~8,750</strong>으로 좁아진다.
+  <strong>왜 개발자 도구 벤치마크인가:</strong> 개발자 도구는 Signup&rarr;Paid가 일반 SaaS의 <strong>절반</strong>(5% vs 10%)이다. Core Plan은 여기에 SDK 설치&rarr;채널 연결이라는 추가 마찰이 있어서 2-3%도 현실적이다. 5% median을 base로 보되, 3% 시나리오를 보수적 계획으로 잡아야 한다.
 </div>
 
 <!-- 4. 결론 -->
@@ -384,15 +385,15 @@
   <div class="action-item">
     <div class="action-num">1</div>
     <div class="action-body">
-      <div class="action-title">Signup&rarr;Paid 전환율 올리기</div>
-      <div class="action-desc">벤치마크 하한 3% &rarr; 5% 이상이 목표. 온보딩 마찰 줄이기, 가이드 이메일, Free tier 소진 시점 넛지가 핵심이다. 5%면 월 8,750, 10%면 월 3,889 트래픽으로 충분하다.</div>
+      <div class="action-title">Signup&rarr;Paid 전환율 올리기 (SDK 설치가 관건)</div>
+      <div class="action-desc">개발자 도구 median 5%가 목표. SDK 설치 마찰을 줄이는 게 핵심이다 &mdash; 가입 후 SDK 설치까지의 드랍이 전환율을 지배한다. 5%면 월 7,000, 3%면 월 11,700 트래픽이 필요하다.</div>
     </div>
   </div>
   <div class="action-item">
     <div class="action-num">2</div>
     <div class="action-body">
       <div class="action-title">트래픽 파이프라인 구축</div>
-      <div class="action-desc">Core Plan 전용 가입자는 현재 ~0이다. (기존 US 트래픽 5.8K/월은 Growth Plan 시절.) 전환율 5% 기준 월 8,750, 전환율 10%이면 월 3,889 트래픽이 필요하다.</div>
+      <div class="action-desc">Core Plan 전용 가입자는 현재 ~0이다. (기존 US 트래픽 5.8K/월은 Growth Plan 시절.) 전환율 5% 기준 월 7,000이면 현재 트래픽의 1.2배. 3%이면 2배가 필요하다.</div>
     </div>
   </div>
 </div>
@@ -430,7 +431,7 @@
 
 <div class="footer">
   Core Plan $30K MRR 시뮬레이션 &middot; 2026-03-15<br>
-  벤치마크 출처: ChartMogul 2026 (Visit&rarr;Signup 7-9%, Signup&rarr;Paid 3-10%)
+  벤치마크 출처: OpenView &times; boldstart 2023 (개발자 도구 전용, 수백 개사 설문)
 </div>
 
 </div>
