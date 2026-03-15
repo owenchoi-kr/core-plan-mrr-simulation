@@ -363,7 +363,43 @@
 </table>
 
 <div style="margin-top:16px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:0.92rem; line-height:1.8; color:var(--text-muted)">
-  <strong style="color:var(--text)">타임라인 제약:</strong> 무료 티어(15K installs) 소진에 약 6개월이 걸린다. 9월에 과금이 시작되려면 <strong style="color:var(--yellow)">3-4월에 활성화가 시작</strong>되어야 한다. 시간이 많지 않다.
+  <strong style="color:var(--text)">타임라인 제약 &mdash; 가입 시점 &times; 인스톨 볼륨:</strong> 무료 티어 15K installs 소진 시간은 고객 볼륨에 따라 다르다. MRR은 9월 스냅샷이므로, 그때 <strong>실제로 과금 중인</strong> 고객만 카운트된다.
+</div>
+
+<table style="margin-top:12px">
+  <thead>
+    <tr><th>월 인스톨</th><th>무료 소진</th><th>3월 가입</th><th>5월 가입</th><th>7월 가입</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7,000 (대형)</td><td>~2개월</td>
+      <td style="color:var(--green)">5월 과금</td>
+      <td style="color:var(--green)">7월 과금</td>
+      <td style="color:var(--green)">9월 과금</td>
+    </tr>
+    <tr>
+      <td>5,000 (중간 상)</td><td>3개월</td>
+      <td style="color:var(--green)">6월 과금</td>
+      <td style="color:var(--green)">8월 과금</td>
+      <td style="color:var(--red)">10월 (초과)</td>
+    </tr>
+    <tr>
+      <td>2,500 (중간 하)</td><td>6개월</td>
+      <td style="color:var(--yellow)">9월 과금</td>
+      <td style="color:var(--red)">11월 (초과)</td>
+      <td style="color:var(--red)">1월 (초과)</td>
+    </tr>
+    <tr>
+      <td>&le;1,250</td><td>영구 무료</td>
+      <td style="color:var(--red)">과금 불가</td>
+      <td style="color:var(--red)">과금 불가</td>
+      <td style="color:var(--red)">과금 불가</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout warn" style="margin-top:12px">
+  <strong>시사점:</strong> 5월 이후 가입자 중 월 인스톨 2,500 이하는 9월 과금 불가. 가입을 <strong>3-4월에 집중</strong>시키거나, <strong>고볼륨 고객을 먼저</strong> 확보해야 한다.
 </div>
 
 <div class="footer">
