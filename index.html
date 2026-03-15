@@ -111,67 +111,6 @@
 
   .highlight-row td { background: rgba(88,166,255,0.08); font-weight: 600; }
 
-  /* Funnel */
-  .funnel { margin: 24px 0; }
-
-  .funnel-step {
-    display: grid;
-    grid-template-columns: 160px 1fr 100px;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    margin: 4px 0;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-  }
-
-  .funnel-step .stage { font-weight: 600; font-size: 0.9rem; }
-  .funnel-step .bar-wrap { position: relative; height: 28px; background: var(--surface2); border-radius: 6px; overflow: hidden; }
-  .funnel-step .bar { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 10px; font-size: 0.8rem; font-weight: 600; color: var(--bg); min-width: 40px; }
-  .funnel-step .count { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .funnel-step .cvr-label { font-size: 0.75rem; color: var(--text-muted); text-align: right; }
-
-  .funnel-arrow {
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.75rem;
-    padding: 2px 0;
-  }
-
-  /* Scenario cards */
-  .scenario-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin: 20px 0;
-  }
-
-  .scenario-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-  }
-
-  .scenario-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-  }
-
-  .scenario-card .kv {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 0;
-    font-size: 0.88rem;
-    border-bottom: 1px solid rgba(48,54,61,0.5);
-  }
-
-  .scenario-card .kv:last-child { border-bottom: none; }
-  .scenario-card .kv .k { color: var(--text-muted); }
-  .scenario-card .kv .v { font-weight: 600; }
-
   /* Callout */
   .callout {
     background: var(--surface);
@@ -230,8 +169,6 @@
 
   @media (max-width: 768px) {
     .big-numbers { grid-template-columns: 1fr; }
-    .scenario-grid { grid-template-columns: 1fr; }
-    .funnel-step { grid-template-columns: 120px 1fr 80px; }
   }
 </style>
 </head>
