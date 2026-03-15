@@ -244,7 +244,7 @@
 <!-- 결론 먼저 -->
 <div class="verdict">
   <p>전체 MRR 목표 $35K 중 기존 딥링크 플랜 $5K를 빼면, <strong>Core Plan이 만들어야 할 MRR은 $30K</strong>다. 현재 Core Plan MRR은 $0.</p>
-  <p>이를 위해 <strong>과금 고객 ~210개사</strong>(이탈 보충 포함)를 6개월 안에 만들어야 한다. 퍼널 CVR을 업계 벤치마크 수준으로 올리면 <span class="warn">월 트래픽 5,300~11,400</span>이 필요하고, 현재 US 트래픽(~5.8K/월)으로는 <strong>최적 시나리오에서만 겨우 가능</strong>하다.</p>
+  <p>이를 위해 <strong>과금 고객 ~210개사</strong>(이탈 보충 포함)를 6개월 안에 만들어야 한다. 벤치마크 2개(Visit&rarr;Signup, Signup&rarr;Paid)만으로 역산하면 <span class="warn">월 트래픽 3,900~8,750</span>이 필요하고, 현재 US 트래픽(~5.8K/월)과 비교하면 <strong>중간 시나리오에서 1.3~1.5배</strong> 수준이다.</p>
 </div>
 
 <!-- 핵심 숫자 -->
@@ -326,97 +326,50 @@
   전환율 5%(벤치마크 Good 상한)를 달성하면 <strong>총 4,200명을 데려와서 210명이 과금</strong>. 월 700명씩 6개월.
 </div>
 
-<!-- 3. 퍼널 역산 -->
+<!-- 3. 트래픽 역산 (벤치마크 2개만) -->
 <h2>3. 그러면 트래픽을 얼마나 부어야 하나?</h2>
 
 <div class="narrative">
-  <p>700명이 가입하려면 그 전에 더 많은 방문자가 와야 한다. Core Plan은 일반 SaaS와 달리 <strong>가입 &rarr; SDK 설치 &rarr; 채널 연결</strong>까지 3단계를 거쳐야 활성화된다. 각 단계마다 이탈이 발생한다.</p>
-  <p>아래는 <strong>업계 벤치마크 CVR</strong>로 210 Paid에서 거꾸로 역산한 것이다.</p>
+  <p>검증된 벤치마크 <strong>2개만</strong> 사용한다:</p>
+  <p>&bull; <strong>Visit &rarr; Signup: 7-9%</strong> (B2B SaaS 평균, ChartMogul 2026)</p>
+  <p>&bull; <strong>Signup &rarr; Paid: 3-10%</strong> (Freemium 셀프서브, ChartMogul 2026)</p>
+  <p>계산: <span class="hl">트래픽 = 210 &divide; (Visit&rarr;Signup &times; Signup&rarr;Paid)</span></p>
 </div>
 
-<!-- Funnel visual -->
-<div class="funnel">
-  <div class="funnel-step">
-    <div class="stage">Traffic</div>
-    <div class="bar-wrap"><div class="bar" style="width:100%; background:var(--accent)"></div></div>
-    <div>
-      <div class="count" style="color:var(--yellow)">68,359</div>
-      <div class="cvr-label">Base</div>
-    </div>
-  </div>
-  <div class="funnel-arrow">&darr; 8% 가입 전환</div>
-  <div class="funnel-step">
-    <div class="stage">Signup</div>
-    <div class="bar-wrap"><div class="bar" style="width:45%; background:var(--purple)"></div></div>
-    <div>
-      <div class="count" style="color:var(--yellow)">5,469</div>
-      <div class="cvr-label"></div>
-    </div>
-  </div>
-  <div class="funnel-arrow">&darr; 20% SDK 설치</div>
-  <div class="funnel-step">
-    <div class="stage">SDK Install</div>
-    <div class="bar-wrap"><div class="bar" style="width:18%; background:var(--orange)"></div></div>
-    <div>
-      <div class="count" style="color:var(--yellow)">1,094</div>
-      <div class="cvr-label"></div>
-    </div>
-  </div>
-  <div class="funnel-arrow">&darr; 60% 채널 연결 (활성화)</div>
-  <div class="funnel-step">
-    <div class="stage">Active</div>
-    <div class="bar-wrap"><div class="bar" style="width:10%; background:var(--yellow)"></div></div>
-    <div>
-      <div class="count" style="color:var(--yellow)">656</div>
-      <div class="cvr-label"></div>
-    </div>
-  </div>
-  <div class="funnel-arrow">&darr; 32% 과금 전환 (free tier 소진)</div>
-  <div class="funnel-step">
-    <div class="stage" style="color:var(--green)">Paid</div>
-    <div class="bar-wrap"><div class="bar" style="width:5%; background:var(--green)">210</div></div>
-    <div>
-      <div class="count" style="color:var(--green)">210</div>
-      <div class="cvr-label"></div>
-    </div>
-  </div>
-</div>
+<table>
+  <thead>
+    <tr><th>Signup&rarr;Paid</th><th>가입자 필요</th><th>Visit&rarr;Signup</th><th>총 트래픽</th><th>월 트래픽</th><th>US 5.8K 대비</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3%</td><td>7,000</td><td>8%</td><td>87,500</td>
+      <td style="color:var(--red); font-weight:700">14,583</td>
+      <td style="color:var(--red); font-weight:700">2.5x</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>5%</strong></td><td><strong>4,200</strong></td><td><strong>8%</strong></td><td><strong>52,500</strong></td>
+      <td style="font-weight:700"><strong>8,750</strong></td>
+      <td style="font-weight:700"><strong>1.5x</strong></td>
+    </tr>
+    <tr>
+      <td>5%</td><td>4,200</td><td>9%</td><td>46,667</td>
+      <td style="font-weight:700">7,778</td>
+      <td style="font-weight:700">1.3x</td>
+    </tr>
+    <tr>
+      <td>10%</td><td>2,100</td><td>9%</td><td>23,333</td>
+      <td style="color:var(--green); font-weight:700">3,889</td>
+      <td style="color:var(--green); font-weight:700">0.7x</td>
+    </tr>
+  </tbody>
+</table>
 
-<div class="narrative">
-  <p>이 퍼널을 <strong>Base 시나리오</strong>(벤치마크 중간값)와 <strong>Aggressive 시나리오</strong>(벤치마크 상한)로 나누면:</p>
-</div>
-
-<div class="scenario-grid">
-  <div class="scenario-card" style="border-color:var(--yellow)">
-    <h3 style="color:var(--yellow)">Base 시나리오</h3>
-    <div class="kv"><span class="k">가입 전환</span><span class="v">8%</span></div>
-    <div class="kv"><span class="k">SDK 설치</span><span class="v">20%</span></div>
-    <div class="kv"><span class="k">채널 연결</span><span class="v">60%</span></div>
-    <div class="kv"><span class="k">과금 전환</span><span class="v">32%</span></div>
-    <div class="kv" style="border-top:2px solid var(--border); margin-top:8px; padding-top:12px">
-      <span class="k">전체 CVR</span><span class="v" style="color:var(--yellow)">0.31%</span>
-    </div>
-    <div class="kv"><span class="k">총 트래픽 필요</span><span class="v">68,359</span></div>
-    <div class="kv"><span class="k"><strong>월 트래픽</strong></span><span class="v" style="color:var(--yellow); font-size:1.1rem"><strong>11,393</strong></span></div>
-    <div class="kv"><span class="k">US 트래픽(5.8K) 대비</span><span class="v" style="color:var(--red)">2.0x</span></div>
-  </div>
-  <div class="scenario-card" style="border-color:var(--green)">
-    <h3 style="color:var(--green)">Aggressive 시나리오</h3>
-    <div class="kv"><span class="k">가입 전환</span><span class="v">9%</span></div>
-    <div class="kv"><span class="k">SDK 설치</span><span class="v">25%</span></div>
-    <div class="kv"><span class="k">채널 연결</span><span class="v">70%</span></div>
-    <div class="kv"><span class="k">과금 전환</span><span class="v">42%</span></div>
-    <div class="kv" style="border-top:2px solid var(--border); margin-top:8px; padding-top:12px">
-      <span class="k">전체 CVR</span><span class="v" style="color:var(--green)">0.66%</span>
-    </div>
-    <div class="kv"><span class="k">총 트래픽 필요</span><span class="v">31,746</span></div>
-    <div class="kv"><span class="k"><strong>월 트래픽</strong></span><span class="v" style="color:var(--green); font-size:1.1rem"><strong>5,291</strong></span></div>
-    <div class="kv"><span class="k">US 트래픽(5.8K) 대비</span><span class="v" style="color:var(--green)">0.9x</span></div>
-  </div>
+<div class="callout">
+  <strong>읽는 법:</strong> Signup&rarr;Paid 5%, Visit&rarr;Signup 8%이면 월 <strong>8,750</strong> 트래픽이 필요하다. 현재 US 5.8K의 1.5배. Signup&rarr;Paid를 10%까지 올리면 현재 트래픽으로도 가능하다.
 </div>
 
 <div class="callout warn">
-  <strong>핵심:</strong> Aggressive 시나리오(퍼널 CVR을 벤치마크 상한까지 전부 올리면)에서만 현재 US 트래픽으로 커버된다. <strong>퍼널 최적화가 안 되면 트래픽을 2배로 늘려야 한다.</strong>
+  <strong>이전 버전과 차이:</strong> 4단계 퍼널(SDK 설치율 20%, 활성화율 60%, Active&rarr;Paid 32%)은 검증 안 된 가정이었다. 벤치마크로 확인된 2개 CVR만 남기면 필요 트래픽 범위가 <strong>월 3,900~8,750</strong>으로 좁아진다.
 </div>
 
 <!-- 4. 결론 -->
@@ -431,15 +384,15 @@
   <div class="action-item">
     <div class="action-num">1</div>
     <div class="action-body">
-      <div class="action-title">퍼널 고치기 (SDK 설치 + 활성화)</div>
-      <div class="action-desc">SDK 설치율 2.2% &rarr; 20%, 활성화율 0% &rarr; 60%. 이게 안 되면 트래픽을 아무리 부어도 소용없다. 온보딩 스텝 축소, 자동 가이드 이메일, 1:1 CS 터치가 필요하다.</div>
+      <div class="action-title">Signup&rarr;Paid 전환율 올리기</div>
+      <div class="action-desc">벤치마크 하한 3% &rarr; 5% 이상이 목표. 온보딩 마찰 줄이기, 가이드 이메일, Free tier 소진 시점 넛지가 핵심이다. 5%면 월 8,750, 10%면 월 3,889 트래픽으로 충분하다.</div>
     </div>
   </div>
   <div class="action-item">
     <div class="action-num">2</div>
     <div class="action-body">
       <div class="action-title">트래픽 파이프라인 구축</div>
-      <div class="action-desc">Core Plan 전용 가입자는 현재 ~0이다. (기존 US 트래픽 5.8K/월은 Growth Plan 시절.) 퍼널이 고쳐지면 월 5,300 트래픽으로 충분하고, 안 고쳐지면 11,400이 필요하다.</div>
+      <div class="action-desc">Core Plan 전용 가입자는 현재 ~0이다. (기존 US 트래픽 5.8K/월은 Growth Plan 시절.) 전환율 5% 기준 월 8,750, 전환율 10%이면 월 3,889 트래픽이 필요하다.</div>
     </div>
   </div>
 </div>
@@ -477,7 +430,7 @@
 
 <div class="footer">
   Core Plan $30K MRR 시뮬레이션 &middot; 2026-03-15<br>
-  벤치마크 출처: ChartMogul &times; ProductLed 2026 (200개 B2B SW), First Page Sage (80개사)
+  벤치마크 출처: ChartMogul 2026 (Visit&rarr;Signup 7-9%, Signup&rarr;Paid 3-10%)
 </div>
 
 </div>
