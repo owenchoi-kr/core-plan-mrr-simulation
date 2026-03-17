@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Core Plan $30K MRR — 600K 인스톨 분배</title>
+<title>Core Plan $30K MRR — 6개월 플랜 (Free tier 반영)</title>
 <style>
   :root {
     --bg: #0d1117;
@@ -66,7 +66,7 @@
 
   .big-numbers {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 16px;
     margin: 20px 0;
   }
@@ -79,7 +79,7 @@
     text-align: center;
   }
 
-  .big-num .value { font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .big-num .value { font-size: 2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
   .big-num .label { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
 
   .narrative {
@@ -120,6 +120,21 @@
   .callout strong { color: var(--text); }
   .callout.warn { border-left-color: var(--yellow); }
 
+  .equation {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    font-size: 1.1rem;
+    text-align: center;
+    line-height: 2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .equation .step { color: var(--text-muted); font-size: 0.85rem; }
+  .equation .result { color: var(--accent); font-weight: 700; font-size: 1.3rem; }
+
   .actions { margin: 20px 0; }
 
   .action-item {
@@ -159,273 +174,315 @@
   }
 
   @media (max-width: 768px) {
-    .big-numbers { grid-template-columns: 1fr; }
+    .big-numbers { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
 </head>
 <body>
 <div class="container">
 
-<h1>Core Plan $30K MRR: 600K 인스톨을 어떻게 채울 것인가</h1>
-<div class="date">2026-03-16 &middot; GTM 시뮬레이션 v3 (Free tier 미적용)</div>
+<h1>Core Plan $30K MRR: 6개월 플랜</h1>
+<div class="date">2026-03-17 &middot; GTM 시뮬레이션 v4 (Free tier 반영, CPI $4)</div>
 
 <!-- 결론 먼저 -->
 <div class="verdict">
-  <p>Free tier(15K/년) 고려 없이 전량 과금. <strong>600K 어트리뷰티드 인스톨 &times; $0.05 = $30K MRR</strong>.</p>
-  <p>총 MRR은 고객 mix와 무관하게 $30K로 고정된다. <span class="warn">진짜 결정은 "몇 개사를 데려올 것인가"</span> &mdash; 이게 GTM 전략을 결정한다.</p>
+  <p>Free tier 15K/년 (월 1,250) 반영. 고객당 4,000 인스톨 기준 과금 인스톨은 <strong>2,750/월</strong>, ARPU <strong>$137.50</strong>.</p>
+  <p><span class="warn">6개월 안에 218개 과금 고객</span>. 5% 전환율이면 총 가입자 4,360명, <strong>월 727명 신규 가입</strong> 필요.</p>
 </div>
 
 <!-- 핵심 숫자 -->
 <div class="big-numbers">
   <div class="big-num">
-    <div class="value" style="color:var(--accent)">600K</div>
-    <div class="label">월간 어트리뷰티드 인스톨</div>
+    <div class="value" style="color:var(--accent)">218</div>
+    <div class="label">과금 고객 (1년차)</div>
   </div>
   <div class="big-num">
     <div class="value" style="color:var(--green)">$30K</div>
-    <div class="label">Core Plan MRR<br>(딥링크 $5K 별도)</div>
+    <div class="label">목표 MRR</div>
   </div>
   <div class="big-num">
-    <div class="value" style="color:var(--yellow)">60~300</div>
-    <div class="label">필요 과금 고객 수<br>(고객 크기에 따라)</div>
+    <div class="value" style="color:var(--yellow)">727</div>
+    <div class="label">월 신규 가입 필요</div>
+  </div>
+  <div class="big-num">
+    <div class="value" style="color:var(--purple)">0.86%</div>
+    <div class="label">Core Plan / UA 비용</div>
   </div>
 </div>
 
-<!-- 1. 왜 600K -->
-<h2>1. 왜 600K인가</h2>
+<!-- 1. 핵심 방정식 -->
+<h2>1. 핵심 방정식</h2>
 
-<div class="narrative">
-  <p><strong>$30,000 &divide; $0.05 = 600,000</strong>. 그게 전부다.</p>
-  <p>Free tier 15K(월 1,250)는 나중에 적용되면 그때 조정한다. 지금은 <strong>모든 인스톨이 과금 대상</strong>이다.</p>
-  <p>딥링크 플랜 $5K를 합치면 전체 MRR 목표 $35K.</p>
-</div>
-
-<!-- 2. 고객 크기별 -->
-<h2>2. 고객 크기 &rarr; 필요 고객 수</h2>
-
-<div class="narrative">
-  <p>고객당 <strong>월 평균 인스톨</strong>이 결정되면, 필요 고객 수가 자동으로 나온다.</p>
-  <p>ICP 인터뷰 기준 UA 지출 $10-33K/월, CPI $4 &rarr; <span class="hl">월 2,500~8,250 인스톨</span> 범위.</p>
+<div class="equation">
+  <div class="step">목표 MRR &divide; 고객당 과금</div>
+  $30,000 &divide; $137.50 = <span class="result">218개사</span><br>
+  <div class="step" style="margin-top:12px">역산: 전환율 5%</div>
+  218 &divide; 0.05 = <span class="result">4,360 가입자</span><br>
+  <div class="step" style="margin-top:12px">6개월 균등 분배</div>
+  4,360 &divide; 6 = <span class="result">727명/월</span>
 </div>
 
 <table>
   <thead>
-    <tr><th>고객 평균 인스톨/월</th><th>ARPU ($0.05)</th><th>필요 고객 수</th><th>비고</th></tr>
+    <tr><th>항목</th><th>값</th><th>근거</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>과금 단가</td><td>$0.05 / attributed install</td><td>제품 가격</td></tr>
+    <tr><td>Free tier</td><td>15,000/년 (1,250/월)</td><td>첫 1년 무료</td></tr>
+    <tr><td>고객 평균 인스톨</td><td>4,000/월</td><td>ICP 중앙값 (CPI $4 &times; UA $16K)</td></tr>
+    <tr><td>과금 인스톨</td><td>2,750/월 (4,000 - 1,250)</td><td>Free tier 차감</td></tr>
+    <tr><td>고객당 ARPU</td><td>$137.50/월 (1년차)</td><td>2,750 &times; $0.05</td></tr>
+    <tr><td>CPI (평균)</td><td>$4.00</td><td>ICP 인터뷰 기반</td></tr>
+    <tr><td>S&rarr;P 전환율</td><td>5%</td><td>Dev tool median (OpenView 2023)</td></tr>
+    <tr><td>V&rarr;S 전환율</td><td>10%</td><td>Dev tool median (OpenView 2023)</td></tr>
+  </tbody>
+</table>
+
+<!-- 2. 고객 경제학 -->
+<h2>2. 고객 경제학 (CPI $4 기준)</h2>
+
+<div class="narrative">
+  <p>고객이 월 $16K UA 지출하고, Core Plan에 $137.50 냄. <strong>UA 비용의 0.86%</strong>. 2년차에는 free tier 소진으로 $200 (1.25%).</p>
+</div>
+
+<table>
+  <thead>
+    <tr><th></th><th>1년차</th><th>2년차~</th></tr>
+  </thead>
+  <tbody>
+    <tr><td style="color:var(--text-muted)">월 인스톨</td><td>4,000</td><td>4,000</td></tr>
+    <tr><td style="color:var(--text-muted)">무료 인스톨</td><td>1,250</td><td>0</td></tr>
+    <tr><td style="color:var(--text-muted)">과금 인스톨</td><td>2,750</td><td>4,000</td></tr>
+    <tr><td style="color:var(--text-muted)">Core Plan 비용</td><td><strong>$137.50</strong></td><td><strong>$200</strong></td></tr>
+    <tr><td style="color:var(--text-muted)">고객 UA 지출</td><td>$16,000</td><td>$16,000</td></tr>
+    <tr class="highlight-row"><td>Core Plan / UA</td><td><strong>0.86%</strong></td><td><strong>1.25%</strong></td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>UA 비용의 1% 미만.</strong> Pricing resistance 거의 없는 수준. "트래킹 비용이 비싸다"는 objection이 나올 수 없다.
+</div>
+
+<!-- 3. 고객 크기별 필요 수 -->
+<h2>3. 고객 크기별 필요 고객 수 (Free tier 반영)</h2>
+
+<div class="narrative">
+  <p>고객 크기에 따라 필요 고객 수가 크게 달라진다. Free tier 1,250/월을 차감한 과금 인스톨 기준.</p>
+</div>
+
+<table>
+  <thead>
+    <tr><th>인스톨/월</th><th>과금 인스톨</th><th>ARPU</th><th>필요 고객</th><th>UA 지출 (CPI $4)</th><th>비고</th></tr>
   </thead>
   <tbody>
     <tr>
-      <td>2,000</td><td>$100</td>
-      <td style="color:var(--red); font-weight:700">300</td>
-      <td style="color:var(--text-muted)">파이프라인 부담 최대</td>
+      <td>2,000</td><td>750</td><td>$37.50</td>
+      <td style="color:var(--red); font-weight:700">800</td>
+      <td>$8,000</td>
+      <td style="color:var(--text-muted)">비현실적</td>
     </tr>
     <tr>
-      <td>2,500</td><td>$125</td>
-      <td style="font-weight:700">240</td>
+      <td>2,500</td><td>1,250</td><td>$62.50</td>
+      <td style="font-weight:700">480</td>
+      <td>$10,000</td>
       <td style="color:var(--text-muted)">ICP 하한</td>
     </tr>
     <tr>
-      <td>3,000</td><td>$150</td>
-      <td style="font-weight:700">200</td>
+      <td>3,000</td><td>1,750</td><td>$87.50</td>
+      <td style="font-weight:700">343</td>
+      <td>$12,000</td>
       <td></td>
     </tr>
     <tr class="highlight-row">
-      <td><strong>4,000</strong></td><td><strong>$200</strong></td>
-      <td><strong>150</strong></td>
+      <td><strong>4,000</strong></td><td><strong>2,750</strong></td><td><strong>$137.50</strong></td>
+      <td><strong>218</strong></td>
+      <td><strong>$16,000</strong></td>
       <td><strong>ICP 중앙값</strong></td>
     </tr>
     <tr>
-      <td>5,000</td><td>$250</td>
-      <td style="font-weight:700">120</td>
+      <td>5,000</td><td>3,750</td><td>$187.50</td>
+      <td style="font-weight:700">160</td>
+      <td>$20,000</td>
       <td></td>
     </tr>
     <tr>
-      <td>7,500</td><td>$375</td>
-      <td style="color:var(--green); font-weight:700">80</td>
-      <td style="color:var(--text-muted)">대형 고객 집중</td>
+      <td>7,500</td><td>6,250</td><td>$312.50</td>
+      <td style="color:var(--green); font-weight:700">96</td>
+      <td>$30,000</td>
+      <td style="color:var(--text-muted)">대형 고객</td>
     </tr>
     <tr>
-      <td>10,000</td><td>$500</td>
-      <td style="color:var(--green); font-weight:700">60</td>
+      <td>10,000</td><td>8,750</td><td>$437.50</td>
+      <td style="color:var(--green); font-weight:700">69</td>
+      <td>$40,000</td>
       <td style="color:var(--text-muted)">찾기 어려움</td>
     </tr>
   </tbody>
 </table>
 
-<div class="callout">
-  <strong>핵심:</strong> 600K 인스톨이면 누가 내든 $30K. 하지만 300개사 파이프라인과 60개사 파이프라인은 <strong>완전히 다른 GTM</strong>이다.
-</div>
-
-<!-- 3. Mix 시나리오 -->
-<h2>3. Mix 시나리오 &mdash; 현실적 분배</h2>
-
-<div class="narrative">
-  <p>고객 크기 분포를 모르니까, 3가지 극단 시나리오로 범위를 잡는다.</p>
-  <p>고객을 3 버킷(소 2K / 중 5K / 대 10K 인스톨)으로 나누고, 비중별 필요 고객 수를 본다.</p>
-</div>
-
-<table>
-  <thead>
-    <tr><th></th><th>A. 롱테일 (PLG)</th><th>B. 균형</th><th>C. 대형 집중</th></tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="color:var(--text-muted)">소형 2K &middot; 비중</td>
-      <td>70%</td><td>40%</td><td>20%</td>
-    </tr>
-    <tr>
-      <td style="color:var(--text-muted)">중형 5K &middot; 비중</td>
-      <td>25%</td><td>40%</td><td>30%</td>
-    </tr>
-    <tr>
-      <td style="color:var(--text-muted)">대형 10K &middot; 비중</td>
-      <td>5%</td><td>20%</td><td>50%</td>
-    </tr>
-    <tr style="border-top:2px solid var(--border)">
-      <td style="color:var(--text-muted)">가중 평균 인스톨</td>
-      <td>3,150</td><td>4,800</td><td>6,900</td>
-    </tr>
-    <tr class="highlight-row">
-      <td><strong>총 과금 고객</strong></td>
-      <td><strong>~191개사</strong></td>
-      <td><strong>~125개사</strong></td>
-      <td><strong>~87개사</strong></td>
-    </tr>
-    <tr>
-      <td style="color:var(--text-muted)">소 / 중 / 대</td>
-      <td>134 / 48 / 10</td>
-      <td>50 / 50 / 25</td>
-      <td>17 / 26 / 44</td>
-    </tr>
-    <tr>
-      <td style="color:var(--text-muted)">인스톨 기여</td>
-      <td>소 45% / 중 40% / 대 17%</td>
-      <td>소 17% / 중 42% / 대 42%</td>
-      <td>소 5% / 중 19% / 대 74%</td>
-    </tr>
-  </tbody>
-</table>
-
 <div class="callout warn">
-  <strong>Mix A</strong>는 PLG 모션(콘텐츠+SEO+커뮤니티)에 맞다 &mdash; 고객 수가 많아서 파이프라인 부담이 크지만 한 곳에 의존하지 않는다.<br>
-  <strong>Mix C</strong>는 아웃바운드+파트너십에 맞다 &mdash; 고객 수가 적지만 대형을 찾아내야 한다.<br>
-  <strong>현실은 이 사이 어딘가.</strong> 데이터가 없으니 Mix B(균형)로 시작하고, 실제 가입 데이터로 보정한다.
+  <strong>v3 대비 변화:</strong> Free tier 반영으로 소형 고객(2K) 필요 수가 300&rarr;800으로 급증. 소형 고객 의존 PLG는 비현실적. <strong>ICP 4,000+ 고객 집중이 필수.</strong>
 </div>
 
-<!-- 4. 퍼널 역산 -->
-<h2>4. 퍼널 역산 &mdash; 몇 명을 데려와야 하나</h2>
+<!-- 4. 6개월 퍼널 역산 -->
+<h2>4. 6개월 퍼널 역산</h2>
 
 <div class="narrative">
-  <p>개발자 도구 벤치마크(OpenView/boldstart 2023): Visit&rarr;Signup <span class="hl">10%</span>, Signup&rarr;Paid <span class="hl">3%</span>(SDK 마찰 감안).</p>
-  <p>3% 월간 이탈 보충 포함 (6개월 균등 획득 시 ~8% 추가 필요).</p>
+  <p>218 과금 고객 &times; 5% S&rarr;P = 4,360 가입자. 10% V&rarr;S 적용.</p>
 </div>
 
 <table>
   <thead>
-    <tr><th>Mix</th><th>과금 고객<br>(이탈 보충)</th><th>총 가입자<br>(3% S&rarr;P)</th><th>총 방문자<br>(10% V&rarr;S)</th><th>월 방문자<br>(6개월)</th><th>US 5.8K 대비</th></tr>
+    <tr><th>단계</th><th>총 (6개월)</th><th>월간</th><th>일간</th></tr>
   </thead>
   <tbody>
     <tr>
-      <td>A. 롱테일</td><td>206</td><td>6,867</td><td>68,667</td>
-      <td style="color:var(--red); font-weight:700">11,444</td>
-      <td style="color:var(--red); font-weight:700">2.0x</td>
-    </tr>
-    <tr class="highlight-row">
-      <td><strong>B. 균형</strong></td><td><strong>135</strong></td><td><strong>4,500</strong></td><td><strong>45,000</strong></td>
-      <td style="font-weight:700"><strong>7,500</strong></td>
-      <td style="font-weight:700"><strong>1.3x</strong></td>
+      <td style="color:var(--text-muted)">과금 고객 (5% S&rarr;P)</td>
+      <td style="font-weight:700">218</td>
+      <td>~36</td>
+      <td>~1.2</td>
     </tr>
     <tr>
-      <td>C. 대형 집중</td><td>94</td><td>3,133</td><td>31,333</td>
-      <td style="color:var(--green); font-weight:700">5,222</td>
-      <td style="color:var(--green); font-weight:700">0.9x</td>
+      <td style="color:var(--text-muted)">총 가입자 (100%)</td>
+      <td style="font-weight:700">4,360</td>
+      <td style="color:var(--yellow); font-weight:700">727</td>
+      <td>~24</td>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted)">총 방문자 (10% V&rarr;S)</td>
+      <td style="font-weight:700">43,600</td>
+      <td>7,267</td>
+      <td>~242</td>
+    </tr>
+    <tr class="highlight-row">
+      <td>현재 US 트래픽 대비</td>
+      <td></td>
+      <td><strong>1.25x</strong> (vs 5.8K)</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
 
 <div class="callout">
-  <strong>Mix C라면 현재 US 트래픽(5.8K) 수준에서도 이론상 가능.</strong> 단, 대형 고객 44개사를 6개월 안에 찾아야 한다. Mix B(균형)는 현재의 1.3배 &mdash; 유료 광고 소량 병행이면 도달 가능한 구간.
+  <strong>현재 US 트래픽 5,800의 1.25배.</strong> 소량 유료 광고 병행하면 도달 가능한 구간. 하루 24명 가입, 그 중 1.2명이 과금 전환.
 </div>
 
 <!-- 5. S→P 전환율 감도 -->
-<h2>5. Signup&rarr;Paid 전환율 감도 (Mix B 기준)</h2>
+<h2>5. S&rarr;P 전환율 감도</h2>
 
 <div class="narrative">
-  <p>3%는 base 가정이다. SDK 온보딩 개선, reverse trial 등으로 전환율이 올라가면 필요 트래픽이 급감한다.</p>
+  <p>전환율이 GTM 난이도를 결정한다. 218개 과금 고객은 고정, 전환율에 따라 필요 가입자/방문자 변동.</p>
 </div>
 
 <table>
   <thead>
-    <tr><th>S&rarr;P</th><th>필요 가입자</th><th>월 방문자 (6개월)</th><th>US 5.8K 대비</th><th>난이도</th></tr>
+    <tr><th>S&rarr;P</th><th>필요 가입자</th><th>월 가입</th><th>월 방문자</th><th>vs 5.8K</th><th>난이도</th></tr>
   </thead>
   <tbody>
     <tr>
-      <td>2%</td><td>6,750</td>
-      <td style="color:var(--red); font-weight:700">11,250</td>
-      <td style="color:var(--red)">1.9x</td>
+      <td>3%</td><td>7,267</td><td>1,211</td>
+      <td style="color:var(--red); font-weight:700">12,111</td>
+      <td style="color:var(--red)">2.1x</td>
       <td style="color:var(--red)">유료 광고 필수</td>
     </tr>
     <tr class="highlight-row">
-      <td><strong>3%</strong></td><td><strong>4,500</strong></td>
-      <td style="font-weight:700"><strong>7,500</strong></td>
-      <td><strong>1.3x</strong></td>
+      <td><strong>5%</strong></td><td><strong>4,360</strong></td><td><strong>727</strong></td>
+      <td style="font-weight:700"><strong>7,267</strong></td>
+      <td><strong>1.25x</strong></td>
       <td><strong>소량 유료 광고 병행</strong></td>
     </tr>
     <tr>
-      <td>5%</td><td>2,700</td>
-      <td style="font-weight:700">4,500</td>
-      <td>0.8x</td>
+      <td>7%</td><td>3,114</td><td>519</td>
+      <td style="font-weight:700">5,190</td>
+      <td>0.9x</td>
       <td style="color:var(--green)">현재 트래픽으로 가능</td>
     </tr>
     <tr>
-      <td>7%</td><td>1,929</td>
-      <td style="color:var(--green); font-weight:700">3,214</td>
+      <td>10%</td><td>2,180</td><td>363</td>
+      <td style="color:var(--green); font-weight:700">3,633</td>
       <td style="color:var(--green)">0.6x</td>
       <td style="color:var(--green)">여유</td>
-    </tr>
-    <tr>
-      <td>10%</td><td>1,350</td>
-      <td style="color:var(--green); font-weight:700">2,250</td>
-      <td style="color:var(--green)">0.4x</td>
-      <td style="color:var(--green)">CS 터치 병행 시</td>
     </tr>
   </tbody>
 </table>
 
 <div class="callout">
-  <strong>전환율 3%&rarr;5%만 올려도</strong> 필요 트래픽이 7,500&rarr;4,500으로 40% 감소. 트래픽 늘리기보다 <strong>SDK 온보딩 마찰 줄이기가 레버리지가 더 크다.</strong>
+  <strong>5%&rarr;7%로 올리면</strong> 월 방문자 7,267&rarr;5,190 (29% 감소). 유료 광고 없이 현재 트래픽만으로 가능해진다. SDK 온보딩 마찰 줄이기가 가장 큰 레버.
 </div>
 
-<!-- 6. 결론 -->
-<h2>6. 결론</h2>
+<!-- 6. 2년차 자연 성장 -->
+<h2>6. 2년차 자연 성장</h2>
 
 <div class="narrative">
-  <p><strong>600K 인스톨 = $30K MRR은 산술적으로 확정.</strong> 남은 결정은 두 가지다:</p>
+  <p>1년차 가입자의 Free tier가 소진되면, 고객당 ARPU가 <strong>$137.50 &rarr; $200</strong>으로 자동 상승.</p>
 </div>
+
+<table>
+  <thead>
+    <tr><th></th><th>1년차 (Month 1-12)</th><th>2년차~ (Month 13+)</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="color:var(--text-muted)">과금 고객</td>
+      <td>218</td>
+      <td>218 (동일)</td>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted)">고객당 ARPU</td>
+      <td>$137.50</td>
+      <td>$200</td>
+    </tr>
+    <tr class="highlight-row">
+      <td><strong>MRR</strong></td>
+      <td><strong>$30,000</strong></td>
+      <td style="color:var(--green)"><strong>$43,600</strong></td>
+    </tr>
+    <tr>
+      <td style="color:var(--text-muted)">성장률</td>
+      <td></td>
+      <td style="color:var(--green)">+45% (신규 획득 없이)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout">
+  <strong>신규 고객 0명이어도 MRR이 45% 성장.</strong> Free tier 소진에 의한 자연 ARPU 상승. 이탈률을 낮추는 것이 곧 성장 전략.
+</div>
+
+<!-- 7. 결론 -->
+<h2>7. 6개월 목표 요약</h2>
 
 <div class="actions">
   <div class="action-item">
     <div class="action-num">1</div>
     <div class="action-body">
-      <div class="action-title">고객 크기 분포를 빨리 알아낸다</div>
-      <div class="action-desc">초기 가입자 데이터가 나오기 전까지 Mix B(균형, 125개사)로 계획한다. 실제 데이터가 쌓이면 소형/대형 비중에 따라 GTM 모션을 조정한다.</div>
+      <div class="action-title">월 727명 가입 파이프라인 구축</div>
+      <div class="action-desc">현재 US 트래픽 5.8K &rarr; 7.3K (1.25배). 콘텐츠 + 소량 유료 광고로 달성 가능. S&rarr;P 7%면 트래픽 증가 없이도 가능.</div>
     </div>
   </div>
   <div class="action-item">
     <div class="action-num">2</div>
     <div class="action-body">
-      <div class="action-title">전환율에 투자한다 &mdash; 트래픽보다 레버리지가 크다</div>
-      <div class="action-desc">S&rarr;P 3%&rarr;5%면 필요 트래픽 40% 감소. SDK 설치 &rarr; 첫 이벤트까지의 드랍을 줄이는 게 가장 효율적인 투자다. 트래픽은 현재 수준(5.8K)에서 소량 증가로도 충분해진다.</div>
+      <div class="action-title">SDK 온보딩 전환율 5%+ 확보</div>
+      <div class="action-desc">전환율이 3%&rarr;5%면 필요 트래픽 40% 감소. 가입&rarr;SDK 연동&rarr;첫 이벤트 드랍 줄이기. 트래픽보다 레버리지가 큼.</div>
+    </div>
+  </div>
+  <div class="action-item">
+    <div class="action-num">3</div>
+    <div class="action-body">
+      <div class="action-title">ICP 4,000+ 인스톨 고객 집중</div>
+      <div class="action-desc">Free tier 반영 시 소형 고객(2K) 800개사 필요 &rarr; 비현실적. ICP 중앙값 4,000 인스톨 이상 고객에 GTM 모션 집중.</div>
     </div>
   </div>
 </div>
 
 <div style="margin-top:24px; padding:20px 24px; background:var(--surface); border:1px solid var(--border); border-radius:10px; font-size:0.92rem; line-height:1.8; color:var(--text-muted)">
-  <strong style="color:var(--text)">v2 대비 변경:</strong> Free tier(15K/년) 제거. 과금 인스톨 = 전체 인스톨. Free tier lag(6개월) 제약 사라짐 &mdash; 가입 후 SDK 연동되면 바로 과금. 타임라인 제약이 대폭 완화되어, <strong style="color:var(--accent)">가입 시점보다 전환율이 더 중요한 변수</strong>가 됐다.
+  <strong style="color:var(--text)">v3 &rarr; v4 변경:</strong> Free tier 15K/년 반영 (v3는 미적용). 고객당 ARPU $200&rarr;$137.50(1년차). 필요 고객 150&rarr;218. CPI $4 기준 고객 경제학 추가. 6개월 타임라인 역산 추가. 2년차 자연 ARPU 상승(+45%) 시나리오 추가.
 </div>
 
 <div class="footer">
-  Core Plan $30K MRR 시뮬레이션 v3 &middot; 2026-03-16<br>
-  벤치마크: OpenView &times; boldstart 2023 (개발자 도구 전용, 수백 개사)
+  Core Plan $30K MRR 시뮬레이션 v4 &middot; 2026-03-17<br>
+  벤치마크: OpenView &times; boldstart 2023 (개발자 도구 전용, 수백 개사) &middot; CPI $4 (ICP 인터뷰 기반)
 </div>
 
 </div>
